@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoreApi.Context;
-using StoreApi.DTO;
+using StoreApi.DTO.Order;
 using StoreApi.Model;
 
 namespace StoreApi.Repository;
@@ -23,8 +23,15 @@ public class OrderRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Order>> ReturnOrdersByDay(string day)
+    {//admin
+        return await _context.Orders.AsNoTracking()
+            .Where(o => o.CreatedAt == Convert.ToDateTime(day))
+            .ToListAsync();
+    }
+
     public async Task<IEnumerable<Order>> ReturnOrdersToday()
-    {//Funcionario e admin
+    {//Funcionário e admin
         DateTime today = DateTime.Today;
         DateTime tomorrow = today.AddDays(1);
 

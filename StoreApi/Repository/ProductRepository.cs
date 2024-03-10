@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoreApi.Context;
-using StoreApi.DTO;
+using StoreApi.DTO.Product;
 using StoreApi.Model;
 
 namespace StoreApi.Repository;
@@ -53,6 +53,12 @@ public class ProductRepository
             return "exist";
         }
 
+        string imagePath = $@"C:\Users\romar\Documentos\Estudos\Projetos\pizzaria\PizzaFront\public\images";
+        string patchImage = Path.Combine(imagePath, data.ImageUrl);
+
+        byte[] convertImage = Convert.FromBase64String(data.Image);
+        File.WriteAllBytes(patchImage, convertImage);
+
         Product product = new ()
         {
             CategoryId = data.CategoryId,
@@ -60,6 +66,7 @@ public class ProductRepository
             Description = data.Description,
             Price = data.Price,
             Size = data.Size,
+            ImagemUrl = data.ImageUrl
         };
 
         _context.Products.Add(product);
@@ -70,7 +77,7 @@ public class ProductRepository
     #endregion
 
     #region UPDATE
-    public async Task<bool> UpdateProduct(int id, UpdateProdutDTO data)
+    public async Task<bool> UpdateProduct(int id, UpdateProductDTO data)
     {
         var product = await _context.Products.FirstOrDefaultAsync(p => p.ProductId == id);
 
@@ -82,6 +89,25 @@ public class ProductRepository
         if (!string.IsNullOrEmpty(data.Name))
         {
             product.Name = data.Name;
+        }
+
+        if (!string.IsNullOrEmpty(data.ImageUrl))
+        {
+            string imagePath = $@"C:\Users\romar\Documentos\Estudos\Projetos\pizzaria\PizzaFront\public\images";
+
+            string pathImageToDelete = Path.Combine(imagePath, data.ImageUrlToDelete);
+
+            if (File.Exists(pathImageToDelete))
+            {
+                File.Delete(pathImageToDelete);
+            }
+
+            string pathImageNew = Path.Combine(imagePath, data.ImageUrl);
+
+            byte[] convertImage = Convert.FromBase64String(data.Image);
+            File.WriteAllBytes(pathImageNew, convertImage);
+
+            product.ImagemUrl = data.ImageUrl;
         }
 
         if (!string.IsNullOrEmpty(data.Description))

@@ -41,7 +41,7 @@ public class DeliveryFeeController : ControllerBase
 
     #region POST
     [HttpPost("createTaxa")]
-    public async Task<ActionResult> CreateCategory([FromBody] decimal value)
+    public async Task<ActionResult> CreateDeliveryFees([FromBody] decimal value)
     {
         try
         {

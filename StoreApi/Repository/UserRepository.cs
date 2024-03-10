@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoreApi.Context;
-using StoreApi.DTO;
+using StoreApi.DTO.User;
 using StoreApi.Model;
 
 namespace StoreApi.Repository;

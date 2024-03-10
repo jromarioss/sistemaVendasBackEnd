@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using StoreApi.DTO;
+using StoreApi.DTO.Auth;
+using StoreApi.DTO.User;
 using StoreApi.Model;
 using StoreApi.Repository;
 using System.IdentityModel.Tokens.Jwt;

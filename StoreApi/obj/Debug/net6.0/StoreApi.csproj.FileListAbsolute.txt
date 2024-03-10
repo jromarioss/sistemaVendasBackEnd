@@ -67,3 +67,4 @@ C:\Users\romar\Documentos\Estudos\Projetos\pizzaria\StoreApi\StoreApi\obj\Debug\
 C:\Users\romar\Documentos\Estudos\Projetos\pizzaria\StoreApi\StoreApi\obj\Debug\net6.0\ref\StoreApi.dll
 C:\Users\romar\Documentos\Estudos\Projetos\pizzaria\StoreApi\StoreApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\romar\Documentos\Estudos\Projetos\pizzaria\StoreApi\StoreApi\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\romar\Documentos\Estudos\Projetos\pizzaria\StoreApi\StoreApi\obj\Debug\net6.0\StoreApi.sourcelink.json

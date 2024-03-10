@@ -1,4 +1,4 @@
-﻿namespace StoreApi.DTO;
+﻿namespace StoreApi.DTO.Auth;
 
 public class AuthDTO
 {

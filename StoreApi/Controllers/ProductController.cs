@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using StoreApi.DTO;
+﻿using Microsoft.AspNetCore.Mvc;
+using StoreApi.DTO.Product;
 using StoreApi.Model;
 using StoreApi.Repository;
 
@@ -161,7 +160,7 @@ public class ProductController : ControllerBase
 
     #region UPDATE
     [HttpPatch("updateProduct/{id:int}")]
-    public async Task<ActionResult> UpdateProdutoById(int id, [FromBody] UpdateProdutDTO data)
+    public async Task<ActionResult> UpdateProdutoById(int id, [FromBody] UpdateProductDTO data)
     {
         try
         {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StoreApi.DTO;
+using StoreApi.DTO.Order;
 using StoreApi.Model;
 using StoreApi.Repository;
 
@@ -23,6 +23,28 @@ public class OrderController : ControllerBase
         try
         {
             var orders = await _orderRepository.ReturnAllOrders();
+
+            if (!orders.Any())
+            {
+                return NotFound(new { message = "Nenhum pedido foi encontrado." });
+            }
+
+            return Ok(orders);
+        }
+        catch (Exception)
+        {
+            return StatusCode(
+                StatusCodes.Status500InternalServerError,
+                    new { message = "Error no servidor, tente novamente mais tarde." });
+        }
+    }
+
+    [HttpGet("getOrderByDay")]
+    public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByDay(string day)
+    {
+        try
+        {
+            var orders = await _orderRepository.ReturnOrdersByDay(day);
 
             if (!orders.Any())
             {
@@ -165,7 +187,7 @@ public class OrderController : ControllerBase
                 return NotFound(new { message = "Nenhum pedido foi encontrado." });
             }
 
-            return Ok(new { message = "Pedido concluido com sucesso." });
+            return Ok(new { message = "Pedido concluído com sucesso." });
         }
         catch (Exception)
         {
@@ -182,14 +204,14 @@ public class OrderController : ControllerBase
     {
         try
         {
-            bool product = await _orderRepository.RemoveOrder(id);
+            bool orderToDelete = await _orderRepository.RemoveOrder(id);
 
-            if (!product)
+            if (!orderToDelete)
             {
-                return NotFound(new { message = "Pedido não encontrado." });
+                return NotFound(new { message = "Nenhum pedido foi encontrado." });
             }
 
-            return Ok(new { message = "Pedido excluido com sucesso." });
+            return Ok(new { message = "Pedido excluído com sucesso." });
         }
         catch (Exception)
         {

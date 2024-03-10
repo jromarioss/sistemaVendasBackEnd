@@ -27,7 +27,7 @@ public class Product
     [StringLength(250)]
     public string ImagemUrl { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+    public string CreatedAt { get; set; }
 
     public DateTime UpdatedAt { get; set; }
 
@@ -38,7 +38,10 @@ public class Product
 
     public Product()
     {
+        DateTime dateNow = DateTime.Now;
+        string formatDate = "dd/MM/yyyy HH:mm:ss";
+        string dateFormated = dateNow.ToString(formatDate);
+        CreatedAt = dateFormated;
         Status = true;
-        CreatedAt = DateTime.Now;
     }
 }

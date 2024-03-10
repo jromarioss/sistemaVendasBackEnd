@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StoreApi.DTO;
+using StoreApi.DTO.User;
 using StoreApi.Model;
 using StoreApi.Repository;
 
@@ -110,14 +110,14 @@ public class UserController : ControllerBase
     {
         try
         {
-            int numberOfCategory = await _userRepository.ReturnNumberOfUser();
+            int numberOfUsers = await _userRepository.ReturnNumberOfUser();
 
-            if (numberOfCategory < 0)
+            if (numberOfUsers < 0)
             {
                 return NotFound(new { message = "Usuários não encontrado." });
             }
 
-            return Ok(numberOfCategory);
+            return Ok(numberOfUsers);
         }
         catch (Exception)
         {
@@ -265,9 +265,9 @@ public class UserController : ControllerBase
     {
         try
         {
-            bool product = await _userRepository.RemoveUser(id);
+            bool userToDelete = await _userRepository.RemoveUser(id);
 
-            if (!product)
+            if (!userToDelete)
             {
                 return NotFound(new { message = "Nenhum usuário(a) foi encontrado." });
             }
